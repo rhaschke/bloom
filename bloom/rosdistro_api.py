@@ -134,11 +134,17 @@ def list_distributions():
 
 
 def get_distribution_type(distro):
-    return get_index().distributions[distro].get('distribution_type')
+    try:
+        return get_index().distributions[distro].get('distribution_type')
+    except KeyError:
+        return 'ros1'
 
 
 def get_python_version(distro):
-    return get_index().distributions[distro].get('python_version')
+    try:
+        return get_index().distributions[distro].get('python_version')
+    except KeyError:
+        return 3
 
 
 def get_most_recent(thing_name, repository, reference_distro):
