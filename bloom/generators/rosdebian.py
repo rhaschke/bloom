@@ -152,7 +152,7 @@ def rosify_package_name(name, rosdistro):
     return 'ros-{0}-{1}'.format(rosdistro, name)
 
 
-def get_subs(pkg, os_name, os_version, ros_distro, deb_inc, native):
+def get_subs(pkg, os_name, os_version, ros_distro, deb_inc, native, skip_test_dependencies):
     # No fallback_resolver provided because peer packages not considered.
     subs = generate_substitutions_from_package(
         pkg,
@@ -161,7 +161,8 @@ def get_subs(pkg, os_name, os_version, ros_distro, deb_inc, native):
         ros_distro,
         RosDebianGenerator.default_install_prefix + ros_distro,
         deb_inc=deb_inc,
-        native=native
+        native=native,
+        skip_test_dependencies=skip_test_dependencies
     )
     subs['Package'] = rosify_package_name(subs['Package'], ros_distro)
     return subs

@@ -77,17 +77,20 @@ def prepare_arguments(parser):
     add('--ros-distro', help="ROS distro, e.g. %s (used for rosdep)" % get_non_eol_distros_prompt())
     add('-i', '--debian-inc', help="debian increment number", default='0')
     add('--native', action='store_true', help="generate native package")
+    add('--skip-test-dependencies', default=False, action='store_true',
+        help="skip to add test dependencies to package dependencies, i.e. Build-Depends")
     return parser
 
 
-def get_subs(pkg, os_name, os_version, ros_distro, deb_inc=0, native=False):
+def get_subs(pkg, os_name, os_version, ros_distro, deb_inc=0, native=False, skip_test_dependencies=False):
     return generate_substitutions_from_package(
         pkg,
         os_name,
         os_version,
         ros_distro,
         deb_inc=deb_inc,
-        native=native
+        native=native,
+        skip_test_dependencies=skip_test_dependencies
     )
 
 
@@ -125,7 +128,7 @@ def main(args=None, get_subs_fn=None):
     for path, pkg in pkgs_dict.items():
         template_files = None
         try:
-            subs = get_subs_fn(pkg, os_name, os_version, ros_distro, args.debian_inc, args.native)
+            subs = get_subs_fn(pkg, os_name, os_version, ros_distro, args.debian_inc, args.native, args.skip_test_dependencies)
             if _place_template_files:
                 # Place template files
                 place_template_files(path, pkg.get_build_type())
