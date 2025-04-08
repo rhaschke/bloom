@@ -686,7 +686,6 @@ class DebianGenerator(BloomGenerator):
             # First branch is debian/[<rosdistro>/]<package>
             self.debian_branches.append(args[0][0])
             self.branch_args.extend(args)
-        self.skip_test_dependencies = args.skip_test_dependencies
 
     def summarize(self):
         info("Generating source debs for the packages: " + str(self.names))
