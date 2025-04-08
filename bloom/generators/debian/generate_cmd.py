@@ -131,7 +131,8 @@ def main(args=None, get_subs_fn=None):
     for path, pkg in pkgs_dict.items():
         template_files = None
         try:
-            subs = get_subs_fn(pkg, os_name, os_version, ros_distro, args.debian_inc, args.native, args.skip_test_dependencies)
+            subs = get_subs_fn(pkg, os_name, os_version, ros_distro, args.debian_inc, args.native,
+                               args.skip_test_dependencies)
             if _place_template_files:
                 # Place template files
                 place_template_files(path, pkg.get_build_type())
