@@ -735,7 +735,6 @@ class DebianGenerator(BloomGenerator):
                                            retry=False)
                     if rule is None:
                         continue
-                    print([key, installer_key])
                     if installer_key != default_installer_key:
                         error("Key '{0}' resolved to '{1}' with installer '{2}', "
                               "which does not match the default installer '{3}'."
