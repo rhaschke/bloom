@@ -45,7 +45,7 @@ import traceback
 import textwrap
 
 from dateutil import tz
-from distutils.version import LooseVersion
+from packaging.version import Version
 from time import strptime
 
 from bloom.generators import BloomGenerator
@@ -276,6 +276,8 @@ def generate_substitutions_from_package(
         pass
     elif build_type == 'cmake':
         pass
+    elif build_type == 'meson':
+        pass
     elif build_type == 'ament_cmake':
         pass
     elif build_type == 'ament_python':
@@ -300,7 +302,7 @@ def generate_substitutions_from_package(
     # Changelog
     if releaser_history:
         sorted_releaser_history = sorted(releaser_history,
-                                         key=lambda k: LooseVersion(k), reverse=True)
+                                         key=lambda k: Version(k), reverse=True)
         sorted_releaser_history = sorted(sorted_releaser_history,
                                          key=lambda k: strptime(releaser_history.get(k)[0], '%a %b %d %Y'),
                                          reverse=True)
